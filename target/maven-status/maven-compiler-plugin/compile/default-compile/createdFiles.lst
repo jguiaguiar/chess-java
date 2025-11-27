@@ -1,0 +1,15 @@
+trabalhoPOO\TrabalhoPOO.class
+chess\Rook.class
+chess\ChessMatch.class
+chess\ChessPiece.class
+chess\ChessPosition.class
+chess\Color.class
+chess\Pawn.class
+chess\UI.class
+boardgame\BoardException.class
+application\Program.class
+boardgame\Board.class
+boardgame\Position.class
+chess\ChessException.class
+chess\King.class
+boardgame\Piece.class
