@@ -1,4 +1,5 @@
 trabalhoPOO\TrabalhoPOO.class
+chess\Bishop.class
 chess\Rook.class
 chess\ChessMatch.class
 chess\ChessPiece.class
@@ -8,8 +9,10 @@ chess\Pawn.class
 chess\UI.class
 boardgame\BoardException.class
 application\Program.class
+chess\Queen.class
 boardgame\Board.class
 boardgame\Position.class
+chess\Knight.class
 chess\ChessException.class
 chess\King.class
 boardgame\Piece.class
