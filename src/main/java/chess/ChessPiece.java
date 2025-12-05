@@ -7,7 +7,7 @@ import boardgame.Position;
 public abstract class ChessPiece extends Piece {
 
     private Color color;
-    private int moveCount; // <--- NOVO: Contador de movimentos
+    private int moveCount; 
 
     public ChessPiece(Board board, Color color) {
         super(board);
@@ -22,12 +22,10 @@ public abstract class ChessPiece extends Piece {
         return moveCount;
     }
     
-    // Método para incrementar o contador (usado ao mover)
     public void increaseMoveCount() {
         moveCount++;
     }
 
-    // Método para decrementar (usado ao desfazer movimento)
     public void decreaseMoveCount() {
         moveCount--;
     }

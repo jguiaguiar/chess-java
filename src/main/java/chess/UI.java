@@ -2,13 +2,12 @@ package chess;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List; // <--- O erro acontecia porque faltava esta linha!
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UI {
 
-	// Cores do texto
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -19,7 +18,6 @@ public class UI {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
 
-	// Cores do fundo
 	public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
 	public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
 	public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";

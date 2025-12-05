@@ -1,8 +1,8 @@
 package application;
 
-import java.util.ArrayList; // Import necessário
+import java.util.ArrayList; 
 import java.util.InputMismatchException;
-import java.util.List;      // Import necessário
+import java.util.List;      
 import java.util.Scanner;
 
 import chess.ChessException;
@@ -17,12 +17,11 @@ public class Program {
         
         Scanner sc = new Scanner(System.in);
         ChessMatch chessMatch = new ChessMatch();
-        List<ChessPiece> captured = new ArrayList<>(); // Lista local para passar para a UI
+        List<ChessPiece> captured = new ArrayList<>(); 
         
         while (true) {
             try {
                 UI.clearScreen();
-                // Passamos a lista de capturadas aqui
                 UI.printMatch(chessMatch, captured);
                 
                 System.out.println();
@@ -39,7 +38,6 @@ public class Program {
                 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
                 
-                // Se alguma peça foi capturada nessa jogada, adicionamos à lista local
                 if (capturedPiece != null) {
                     captured.add(capturedPiece);
                 }

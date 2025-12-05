@@ -14,8 +14,7 @@ public class ChessMatch {
     private Color currentPlayer;
     private Board board;
     private boolean check;
-    private boolean checkMate; // <--- NOVO: Variável para saber se o jogo acabou
-    
+    private boolean checkMate;
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
 
@@ -38,7 +37,6 @@ public class ChessMatch {
         return check;
     }
 
-    // <--- NOVO: Getter para a UI saber se deve mostrar a tela de vitória
     public boolean getCheckMate() {
         return checkMate;
     }
@@ -68,23 +66,19 @@ public class ChessMatch {
         
         Piece capturedPiece = makeMove(source, target);
         
-        // Verifica se eu me coloquei em Xeque (Suicídio). Se sim, desfaz tudo!
         if (testCheck(currentPlayer)) {
             undoMove(source, target, capturedPiece);
             throw new ChessException("You can't put yourself in check");
         }
         
-        // Verifica se o oponente ficou em xeque com a minha jogada
         Piece opponentKing = king(opponent(currentPlayer));
-        // Operador ternário para definir se está em xeque ou não
         check = (testCheck(opponent(currentPlayer))) ? true : false;
 
-        // <--- NOVO: Testa se o jogo acabou (Xeque-Mate)
         if (testCheckMate(opponent(currentPlayer))) {
             checkMate = true;
         }
         else {
-            nextTurn(); // Só passa o turno se NÃO for xeque-mate. Se for, o jogo para aqui.
+            nextTurn(); 
         }
         
         return (ChessPiece)capturedPiece;
@@ -92,7 +86,7 @@ public class ChessMatch {
 
    private Piece makeMove(Position source, Position target) {
         ChessPiece p = (ChessPiece)board.removePiece(source);
-        p.increaseMoveCount(); // <--- NOVO: Aumenta o contador ao mover
+        p.increaseMoveCount(); 
         
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
@@ -107,7 +101,7 @@ public class ChessMatch {
     
     private void undoMove(Position source, Position target, Piece capturedPiece) {
         ChessPiece p = (ChessPiece)board.removePiece(target);
-        p.decreaseMoveCount(); // <--- NOVO: Diminui o contador ao desfazer
+        p.decreaseMoveCount(); 
         
         board.placePiece(p, source);
         
@@ -168,37 +162,28 @@ public class ChessMatch {
         return false;
     }
 
-    // <--- NOVO: O Algoritmo de Xeque-Mate
     private boolean testCheckMate(Color color) {
-        // Se não está em xeque, não é xeque-mate
         if (!testCheck(color)) {
             return false;
         }
         
-        // Pega todas as peças desse jogador
         List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
         
-        // Para cada peça minha...
         for (Piece p : list) {
             boolean[][] mat = p.possibleMoves();
             
-            // ... vou testar cada movimento possível dela na matriz
             for (int i=0; i<board.getRows(); i++) {
                 for (int j=0; j<board.getColumns(); j++) {
-                    if (mat[i][j]) { // Se esse movimento é possível
+                    if (mat[i][j]) { 
                         
-                        // Simulo o movimento:
                         Position source = ((ChessPiece)p).getChessPosition().toPosition();
                         Position target = new Position(i, j);
                         Piece capturedPiece = makeMove(source, target);
                         
-                        // Testo: "Se eu fizer isso, eu continuo em xeque?"
                         boolean testCheck = testCheck(color);
                         
-                        // Desfaço o movimento (era só simulação)
                         undoMove(source, target, capturedPiece);
                         
-                        // Se depois do movimento eu NÃO estou mais em xeque, então UFA! Não é xeque-mate.
                         if (!testCheck) {
                             return false;
                         }
@@ -206,7 +191,6 @@ public class ChessMatch {
                 }
             }
         }
-        // Se eu testei todas as minhas peças, todos os movimentos, e continuo em xeque... PERDEU!
         return true;
     }
 
@@ -243,7 +227,6 @@ public class ChessMatch {
     placeNewPiece('g', 8, new Knight(board, Color.BLACK));
     placeNewPiece('h', 8, new Rook(board, Color.BLACK));
 
-    // Black pawns
     placeNewPiece('a', 7, new Pawn(board, Color.BLACK));
     placeNewPiece('b', 7, new Pawn(board, Color.BLACK));
     placeNewPiece('c', 7, new Pawn(board, Color.BLACK));
